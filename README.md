@@ -1,11 +1,14 @@
 # CivicCoin
 
-## Demo Video
+## Demo Video (Evidence of Functionality)
 🎥 [Watch our live demo on YouTube]
 [![YouTube Video wz42oooWb7c](https://img.youtube.com/vi/wz42oooWb7c/maxresdefault.jpg)](https://www.youtube.com/watch?v=wz42oooWb7c)
 
+## Demo Video with Audio (Loom-style)/Project Walkthrough Video/Showing Structure Of Repo
+[![YouTube Video wz42oooWb7c]https://www.youtube.com/watch?v=bN6ZPh0F6ZM)
+
 ## Canva link:
-https://www.canva.com/design/DAGySxB5yDI/UYF9eWMrOLy94Mwup7-WFw/edit?utm_content=DAGySxB5yDI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+[https://www.canva.com/design/DAGySxB5yDI/UYF9eWMrOLy94Mwup7-WFw/edit?utm_content=DAGySxB5yDI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton](https://www.canva.com/design/DAGySxB5yDI/UYF9eWMrOLy94Mwup7-WFw/edit?utm_content=DAGySxB5yDI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## Screenshots: 
 <img width="972" height="956" alt="image" src="https://github.com/user-attachments/assets/6ac18e6a-ca43-412f-aff9-6bb7eca09054" />
