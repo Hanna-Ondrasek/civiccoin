@@ -7,6 +7,15 @@
 ## Canva link:
 https://www.canva.com/design/DAGySxB5yDI/UYF9eWMrOLy94Mwup7-WFw/edit?utm_content=DAGySxB5yDI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
+## Screenshots: 
+<img width="972" height="956" alt="image" src="https://github.com/user-attachments/assets/6ac18e6a-ca43-412f-aff9-6bb7eca09054" />
+<img width="1183" height="960" alt="image" src="https://github.com/user-attachments/assets/68bf7926-644d-457b-9140-6f1506799d65" />
+
+<img width="1187" height="957" alt="image" src="https://github.com/user-attachments/assets/52dafaee-19c2-457f-a34f-a839785693a1" />
+<img width="1183" height="956" alt="image" src="https://github.com/user-attachments/assets/dc94efd4-19a1-4024-91be-ee4abbad5fd5" />
+
+
+
 ## Short Summary
 **CivicCoin: Blockchain-powered civic engagement platform rewarding community actions with verifiable badges and tokens via Algorand smart contracts.**
 
