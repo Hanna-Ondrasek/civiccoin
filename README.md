@@ -5,7 +5,7 @@
 [![YouTube Video wz42oooWb7c](https://img.youtube.com/vi/wz42oooWb7c/maxresdefault.jpg)](https://www.youtube.com/watch?v=wz42oooWb7c)
 
 ## Demo Video with Audio (Loom-style)/Project Walkthrough Video/Showing Structure Of Repo
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bN6ZPh0F6ZM?si=2Pv_5LqQHRDrRkvg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/bN6ZPh0F6ZM/maxresdefault.jpg)](https://youtu.be/bN6ZPh0F6ZM)
 
 ## Canva link:
 https://www.canva.com/design/DAGySxB5yDI/UYF9eWMrOLy94Mwup7-WFw/edit?utm_content=DAGySxB5yDI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
