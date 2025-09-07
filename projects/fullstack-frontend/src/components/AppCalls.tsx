@@ -1,10 +1,10 @@
+import { AlgorandClient } from '@algorandfoundation/algokit-utils'
+import { OnSchemaBreak, OnUpdate } from '@algorandfoundation/algokit-utils/types/app'
 import { useWallet } from '@txnlab/use-wallet-react'
 import { useSnackbar } from 'notistack'
 import { useState } from 'react'
-import { HelloWorldFactory } from '../contracts/HelloWorld'
-import { OnSchemaBreak, OnUpdate } from '@algorandfoundation/algokit-utils/types/app'
+import { CivicMsgFactory } from '../contracts/CivicMsg'
 import { getAlgodConfigFromViteEnvironment, getIndexerConfigFromViteEnvironment } from '../utils/network/getAlgoClientConfigs'
-import { AlgorandClient } from '@algorandfoundation/algokit-utils'
 
 interface AppCallsInterface {
   openModal: boolean
@@ -33,7 +33,7 @@ const AppCalls = ({ openModal, setModalState }: AppCallsInterface) => {
     // Instead, you would deploy your contract on your backend and reference it by id.
     // Given the simplicity of the starter contract, we are deploying it on the frontend
     // for demonstration purposes.
-    const factory = new HelloWorldFactory({
+    const factory = new CivicMsgFactory({
       defaultSender: activeAddress ?? undefined,
       algorand,
     })
@@ -54,7 +54,7 @@ const AppCalls = ({ openModal, setModalState }: AppCallsInterface) => {
 
     const { appClient } = deployResult
 
-    const response = await appClient.send.hello({ args: { name: contractInput } }).catch((e: Error) => {
+    const response = await appClient.send.civic({ args: { name: contractInput } }).catch((e: Error) => {
       enqueueSnackbar(`Error calling the contract: ${e.message}`, { variant: 'error' })
       setLoading(false)
       return undefined

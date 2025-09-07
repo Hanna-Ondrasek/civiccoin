@@ -105,13 +105,14 @@ def build(output_dir: Path, contract_path: Path) -> Path:
             "python",
             str(contract_path.resolve()),
             f"--out-dir={output_dir}",
-            "--no-output-arc32",
+            "--output-arc32",
             "--output-arc56",
             "--output-source-map",
         ],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
+        encoding="utf-8",
     )
     if build_result.returncode:
         raise Exception(f"Could not build contract:\n{build_result.stdout}")

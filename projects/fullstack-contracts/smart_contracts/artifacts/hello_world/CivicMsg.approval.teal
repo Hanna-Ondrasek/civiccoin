@@ -1,0 +1,106 @@
+#pragma version 10
+#pragma typetrack false
+
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
+main:
+    // smart_contracts/hello_world/contract.py:50-55
+    // # need to use an indexer to access lora
+    // # could show everything on lora
+    // # Donor walks in, shows the clinic their QR code (algorand address)
+    // # Once the clinic has their address, the clinic sends a transation to that address of 1 donation token
+    // # after part -- if i as a donor have 10 donor tokens, i can use smart contract to turn donations into a certificate
+    // class CivicMsg(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@6
+    pushbytes 0x2543b78e // method "civic(string)string"
+    txna ApplicationArgs 0
+    match main_civic_route@3
+
+main_after_if_else@10:
+    // smart_contracts/hello_world/contract.py:50-55
+    // # need to use an indexer to access lora
+    // # could show everything on lora
+    // # Donor walks in, shows the clinic their QR code (algorand address)
+    // # Once the clinic has their address, the clinic sends a transation to that address of 1 donation token
+    // # after part -- if i as a donor have 10 donor tokens, i can use smart contract to turn donations into a certificate
+    // class CivicMsg(ARC4Contract):
+    pushint 0 // 0
+    return
+
+main_civic_route@3:
+    // smart_contracts/hello_world/contract.py:56
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/hello_world/contract.py:50-55
+    // # need to use an indexer to access lora
+    // # could show everything on lora
+    // # Donor walks in, shows the clinic their QR code (algorand address)
+    // # Once the clinic has their address, the clinic sends a transation to that address of 1 donation token
+    // # after part -- if i as a donor have 10 donor tokens, i can use smart contract to turn donations into a certificate
+    // class CivicMsg(ARC4Contract):
+    txna ApplicationArgs 1
+    extract 2 0
+    // smart_contracts/hello_world/contract.py:56
+    // @abimethod()
+    callsub civic
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_bare_routing@6:
+    // smart_contracts/hello_world/contract.py:50-55
+    // # need to use an indexer to access lora
+    // # could show everything on lora
+    // # Donor walks in, shows the clinic their QR code (algorand address)
+    // # Once the clinic has their address, the clinic sends a transation to that address of 1 donation token
+    // # after part -- if i as a donor have 10 donor tokens, i can use smart contract to turn donations into a certificate
+    // class CivicMsg(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@10
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    pushint 1 // 1
+    return
+
+
+// smart_contracts.hello_world.contract.CivicMsg.civic(name: bytes) -> bytes:
+civic:
+    // smart_contracts/hello_world/contract.py:56-57
+    // @abimethod()
+    // def civic(self, name: String) -> String:
+    proto 1 1
+    // smart_contracts/hello_world/contract.py:59
+    // name_hash = sha256(name.bytes)
+    frame_dig -1
+    sha256
+    // smart_contracts/hello_world/contract.py:58
+    // encoded_password = sha256(String(my_password.epic_password).bytes)
+    pushbytes 0x0092659d24b60ea13b860683d75171cade7b6b78c9585feb2cc75f69b4ce642e
+    // smart_contracts/hello_world/contract.py:60
+    // if name_hash == encoded_password:
+    ==
+    bz civic_else_body@2
+    // smart_contracts/hello_world/contract.py:61
+    // return String("+ 1 tokens awarded! " )
+    pushbytes "+ 1 tokens awarded! "
+    retsub
+
+civic_else_body@2:
+    // smart_contracts/hello_world/contract.py:63
+    // return String("invalid event code")
+    pushbytes "invalid event code"
+    retsub

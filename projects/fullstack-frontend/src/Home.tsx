@@ -1,76 +1,292 @@
-// src/components/Home.tsx
-import { useWallet } from '@txnlab/use-wallet-react'
-import React, { useState } from 'react'
-import ConnectWallet from './components/ConnectWallet'
-import Transact from './components/Transact'
-import AppCalls from './components/AppCalls'
+'use client';
 
-interface HomeProps {}
+import { useWallet } from '@txnlab/use-wallet-react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
+import AppCalls from './components/AppCalls';
+import ConnectWallet from './components/ConnectWallet';
+import Transact from './components/Transact';
 
-const Home: React.FC<HomeProps> = () => {
-  const [openWalletModal, setOpenWalletModal] = useState<boolean>(false)
-  const [openDemoModal, setOpenDemoModal] = useState<boolean>(false)
-  const [appCallsDemoModal, setAppCallsDemoModal] = useState<boolean>(false)
-  const { activeAddress } = useWallet()
-
-  const toggleWalletModal = () => {
-    setOpenWalletModal(!openWalletModal)
+// Mock data for the badges and rewards sections
+const mockBadges = [
+  {
+    name: "Blood Hero",
+    description: "You donated blood in your community.",
+    image: "https://placehold.co/100x100/FF0000/FFFFFF?text=Blood+Hero"
+  },
+  {
+    name: "Clean-up Crew",
+    description: "You've helped clean up a local park or community area.",
+    image: "https://placehold.co/100x100/50C878/FFFFFF?text=Clean+Badge"
+  },
+  {
+    name: "Community Organizer",
+    description: "You organized a successful community event.",
+    image: "https://placehold.co/100x100/A3E635/FFFFFF?text=Org+Badge"
+  },
+  {
+    name: "Civic Champion",
+    description: "You logged 10 civic actions in a single month!",
+    image: "https://placehold.co/100x100/FACC15/FFFFFF?text=Civic+Champ"
   }
+];
 
-  const toggleDemoModal = () => {
-    setOpenDemoModal(!openDemoModal)
+const mockRewards = [
+  {
+    name: "1 Month Fitness Pass",
+    description: "For getting 10 algos from taking civic action to help your community!",
+    image: "https://placehold.co/100x100/F0582D/FFFFFF?text=Pass"
+  },
+  {
+    name: "Movie Ticket",
+    description: "For logging your first five civic actions.",
+    image: "https://placehold.co/100x100/C51162/FFFFFF?text=Movie"
+  },
+  {
+    name: "Free Coffee",
+    description: "For reaching your first 100 algos.",
+    image: "https://placehold.co/100x100/6A1B9A/FFFFFF?text=Coffee"
   }
+];
 
-  const toggleAppCallsModal = () => {
-    setAppCallsDemoModal(!appCallsDemoModal)
-  }
+const Navbar = ({ activeAddress }: { activeAddress?: string }) => {
+  return (
+    <nav className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
+      <div className="flex items-center gap-2">
+        <div className="size-7 rounded-full bg-gradient-to-br from-violet-500 to-pink-500" />
+        <h1 className="text-base font-bold md:text-2xl">CivicCoin 💵</h1>
+      </div>
+      <div className="flex items-center gap-2">
+        {activeAddress && (
+          <span className="text-sm text-gray-600 dark:text-gray-400">
+            {activeAddress.slice(0, 6)}...{activeAddress.slice(-4)}
+          </span>
+        )}
+        <button className="w-24 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+          {activeAddress ? 'Connected' : 'Login'}
+        </button>
+      </div>
+    </nav>
+  );
+};
+
+// The home page with the single "Explore Now" button
+const Homepage = ({ setPage }: { setPage: Dispatch<SetStateAction<string>> }) => {
+  const { activeAddress } = useWallet();
 
   return (
-    <div className="hero min-h-screen bg-teal-400">
-      <div className="hero-content text-center rounded-lg p-6 max-w-md bg-white mx-auto">
-        <div className="max-w-md">
-          <h1 className="text-4xl">
-            Welcome to <div className="font-bold">AlgoKit 🙂</div>
-          </h1>
-          <p className="py-6">
-            This starter has been generated using official AlgoKit React template. Refer to the resource below for next steps.
-          </p>
-
-          <div className="grid">
-            <a
-              data-test-id="getting-started"
-              className="btn btn-primary m-2"
-              target="_blank"
-              href="https://github.com/algorandfoundation/algokit-cli"
-            >
-              Getting started
-            </a>
-
-            <div className="divider" />
-            <button data-test-id="connect-wallet" className="btn m-2" onClick={toggleWalletModal}>
-              Wallet Connection
-            </button>
-
-            {activeAddress && (
-              <button data-test-id="transactions-demo" className="btn m-2" onClick={toggleDemoModal}>
-                Transactions Demo
-              </button>
-            )}
-
-            {activeAddress && (
-              <button data-test-id="appcalls-demo" className="btn m-2" onClick={toggleAppCallsModal}>
-                Contract Interactions Demo
-              </button>
-            )}
+    <div className="relative mx-auto my-10 flex max-w-7xl flex-col items-center justify-center">
+      <Navbar activeAddress={activeAddress || undefined} /> 
+      <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="px-4 py-10 md:py-20">
+        <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
+          {"Launch your civic engagement journey today"
+            .split(" ")
+            .map((word, index) => (
+              <span
+                key={index}
+                className="mr-2 inline-block"
+              >
+                {word}
+              </span>
+            ))}
+        </h1>
+        <p className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400">
+          Now more than ever, our communities need champions who stand up and take action when it matters most. Connect your Algorand wallet and start logging your civic actions on the blockchain to earn verifiable rewards and badges while building the stronger, more united future we all deserve.
+        </p>
+        <div className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4">
+          <button
+            className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+            onClick={() => setPage('main')}
+          >
+            Explore Now
+          </button>
+        </div>
+        <div className="relative z-10 mt-20 rounded-3xl border border-neutral-200 bg-neutral-100 p-4 shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+          <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
+            <img
+              src="https://images.pexels.com/photos/3280130/pexels-photo-3280130.jpeg?_gl=1*eqooi3*_ga*MTQyMjExMDQ3OS4xNzU3MjQxMjg5*_ga_8JE65Q40S6*czE3NTcyNDEyODgkbzEkZzEkdDE3NTcyNDEzMTckajMxJGwwJGgw"
+              alt="Civic action platform preview"
+              className="aspect-[16/9] h-auto w-full object-cover"
+              height={1000}
+              width={1000}
+            />
           </div>
-
-          <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
-          <Transact openModal={openDemoModal} setModalState={setOpenDemoModal} />
-          <AppCalls openModal={appCallsDemoModal} setModalState={setAppCallsDemoModal} />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+const MainApp = () => {
+  const [activeSection, setActiveSection] = useState('log');
+  const [openWalletModal, setOpenWalletModal] = useState<boolean>(false);
+  const [openDemoModal, setOpenDemoModal] = useState<boolean>(false);
+  const [appCallsDemoModal, setAppCallsDemoModal] = useState<boolean>(false);
+  const { activeAddress } = useWallet();
+
+  const toggleWalletModal = () => {
+    setOpenWalletModal(!openWalletModal);
+  };
+
+  const toggleDemoModal = () => {
+    setOpenDemoModal(!openDemoModal);
+  };
+
+  const toggleAppCallsModal = () => {
+    setAppCallsDemoModal(!appCallsDemoModal);
+  };
+  
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'log':
+        return (
+          <div className="p-8">
+            <div className="hero-content text-center rounded-lg p-6 max-w-md bg-white mx-auto">
+              <div className="max-w-md">
+                <h1 className="text-4xl">
+                  Welcome to <div className="font-bold">CivicCoin 💵</div>
+                </h1>
+                <p className="py-6">
+                  Connect your wallet and start logging your civic actions to earn rewards and badges for making a positive impact in your community.
+                </p>
+                <div className="grid">
+                  <button 
+                    data-test-id="connect-wallet" 
+                    className="w-full transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 m-2"
+                    onClick={toggleWalletModal}
+                  >
+                    {activeAddress ? 'Wallet Connected' : 'Connect Wallet'}
+                  </button>
+                  
+                  {activeAddress && (
+                    <button 
+                      data-test-id="transactions-demo" 
+                      className="w-full transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 m-2"
+                      onClick={toggleDemoModal}
+                    >
+                      For Event Organizers
+                    </button>
+                  )}
+                  
+                  {activeAddress && (
+                    <button 
+                      data-test-id="appcalls-demo" 
+                      className="w-full transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 m-2"
+                      onClick={toggleAppCallsModal}
+                    >
+                      Enter Your Custom Event Code
+                    </button>
+                  )}
+                  
+                  
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Components */}
+            <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
+            <Transact openModal={openDemoModal} setModalState={setOpenDemoModal} />
+            <AppCalls openModal={appCallsDemoModal} setModalState={setAppCallsDemoModal} />
+          </div>
+        );
+      case 'badges':
+        return (
+          <div className="p-8">
+            <h2 className="text-3xl font-bold mb-6 text-slate-700 dark:text-slate-300">Your Badges</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {mockBadges.map((badge, index) => (
+                <div key={index} className="flex flex-col items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                  <img src={badge.image} alt={badge.name} className="w-24 h-24 rounded-full mb-4" />
+                  <h3 className="font-semibold text-lg">{badge.name}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{badge.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      case 'rewards':
+        return (
+          <div className="p-8">
+            <h2 className="text-3xl font-bold mb-6 text-slate-700 dark:text-slate-300">Your Rewards</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {mockRewards.map((reward, index) => (
+                <div key={index} className="flex flex-col items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md text-center">
+                  <img src={reward.image} alt={reward.name} className="w-24 h-24 rounded-full mb-4" />
+                  <h3 className="font-semibold text-lg">{reward.name}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{reward.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen">
+      <div className="bg-gray-100 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 w-64 p-4 fixed h-full z-10">
+        <div className="mb-8">
+          <div className="size-7 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 mx-auto mb-2" />
+          <h1 className="text-center text-xl font-bold md:text-2xl">CivicCoin 💵</h1>
+        </div>
+        <nav className="flex flex-col gap-2">
+          <button
+            onClick={() => setActiveSection('log')}
+            className={`w-full px-4 py-2 rounded-lg text-left transition-colors duration-200 ${
+              activeSection === 'log' ? 'bg-blue-500 text-white shadow-lg' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+            }`}
+          >
+            Log Civic Action
+          </button>
+          <button
+            onClick={() => setActiveSection('badges')}
+            className={`w-full px-4 py-2 rounded-lg text-left transition-colors duration-200 ${
+              activeSection === 'badges' ? 'bg-blue-500 text-white shadow-lg' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+            }`}
+          >
+            Badges
+          </button>
+          <button
+            onClick={() => setActiveSection('rewards')}
+            className={`w-full px-4 py-2 rounded-lg text-left transition-colors duration-200 ${
+              activeSection === 'rewards' ? 'bg-blue-500 text-white shadow-lg' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+            }`}
+          >
+            Rewards
+          </button>
+        </nav>
+      </div>
+
+      <div className="flex-1 ml-64 p-8">
+        <Navbar activeAddress={activeAddress || undefined} />
+        <div className="mt-8">
+          {renderContent()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default function Home() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  return (
+    <div>
+      {currentPage === 'home' ? (
+        <Homepage setPage={setCurrentPage} />
+      ) : (
+        <MainApp />
+      )}
+    </div>
+  );
+}
