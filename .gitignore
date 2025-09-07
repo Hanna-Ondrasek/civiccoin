@@ -31,7 +31,7 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-my_password.py
+fullstack-contracts/my_password.py
 
 # Installer logs
 pip-log.txt
