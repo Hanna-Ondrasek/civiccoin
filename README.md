@@ -1,7 +1,8 @@
 # CivicCoin
 
 ## Demo Video
-🎥 [Watch our live demo on YouTube](https://youtu.be/wz42oooWb7c)
+🎥 [Watch our live demo on YouTube]
+[![YouTube Video wz42oooWb7c](https://img.youtube.com/vi/wz42oooWb7c/maxresdefault.jpg)](https://www.youtube.com/watch?v=wz42oooWb7c)
 
 ## Canva link:
 https://www.canva.com/design/DAGySxB5yDI/UYF9eWMrOLy94Mwup7-WFw/edit?utm_content=DAGySxB5yDI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
